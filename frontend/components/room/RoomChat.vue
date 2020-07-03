@@ -2,7 +2,7 @@
   <v-container fluid>
     <section class="parent">
       <div class="users">
-        <v-navigation-drawer v-bind:class="[userList ? 'showUserList' : 'hideUserList']" mobile-break-point="300">
+        <v-navigation-drawer v-bind:class="[userList ? 'showUserList' : 'hideUserList']" mobile-breakpoint="300">
           <v-list dense nav>
             <v-list-item v-for="user in usersInChatRoom" :key="user.name">
               <v-list-item-avatar>

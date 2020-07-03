@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer :value="sidebar" app mobile-break-point="600">
+    <v-navigation-drawer :value="sidebar" app mobile-breakpoint="600">
       <new-room></new-room>
       <v-divider></v-divider>
       <room-list></room-list>
@@ -9,23 +9,20 @@
     <v-app-bar app color="indigo" dark>
       <v-row justify="center">
         <v-toolbar-items>
-          <v-btn text to="/" large>Home
-          </v-btn>
-          <v-btn text to="/chat" large>Chat
-          </v-btn>
-          <v-btn text to="/about" large>About
-          </v-btn>
+          <v-btn text to="/" large>Home</v-btn>
+          <v-btn text to="/chat" large>Chat</v-btn>
+          <v-btn text to="/about" large>About</v-btn>
         </v-toolbar-items>
       </v-row>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container fluid fill-height>
         <v-layout align-top justify-center mt-12>
           <nuxt/>
         </v-layout>
       </v-container>
-    </v-content>
+    </v-main>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2020 <a href="https://colaba.online" target="_blank" class="white--text">colaba.online</a></span>
     </v-footer>
