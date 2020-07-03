@@ -1,11 +1,11 @@
-package by.steklopod.multiroomchat.chat.service;
+package by.steklopod.chat.service;
 
-import by.steklopod.multiroomchat.app.AppError;
-import by.steklopod.multiroomchat.user.User;
-import by.steklopod.multiroomchat.chat.domain.Room;
-import by.steklopod.multiroomchat.chat.dto.ChatRoomUserListDto;
-import by.steklopod.multiroomchat.chat.dto.SimpleRoomDto;
-import by.steklopod.multiroomchat.chat.dto.UserRoomKeyDto;
+import by.steklopod.chat.domain.AppError;
+import by.steklopod.chat.domain.User;
+import by.steklopod.chat.domain.Room;
+import by.steklopod.chat.domain.dto.ChatRoomUserListDto;
+import by.steklopod.chat.domain.dto.SimpleRoomDto;
+import by.steklopod.chat.domain.dto.UserRoomKeyDto;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package by.steklopod.multiroomchat.chat.dto;
+package by.steklopod.chat.domain.dto;
 
 import java.util.Objects;
 

@@ -1,19 +1,10 @@
 <template>
   <v-container fluid>
-    <div class="parent">
+    <section class="parent">
       <div class="users">
-        <v-navigation-drawer
-          v-bind:class="[userList ? 'showUserList' : 'hideUserList']"
-          mobile-break-point="300"
-        >
-          <v-list
-            dense
-            nav
-          >
-            <v-list-item
-              v-for="user in usersInChatRoom"
-              :key="user.name"
-            >
+        <v-navigation-drawer v-bind:class="[userList ? 'showUserList' : 'hideUserList']" mobile-break-point="300">
+          <v-list dense nav>
+            <v-list-item v-for="user in usersInChatRoom" :key="user.name">
               <v-list-item-avatar>
                 <v-avatar color="#ff9b20">
                   <span class="white--text headline">{{ user.name.charAt(0) }}</span>
@@ -26,22 +17,15 @@
           </v-list>
         </v-navigation-drawer>
       </div>
+
       <div class="chat-container">
         <div class="header">
-          <v-card
-            color="grey lighten-4"
-            flat
-            tile
-            class="flex-grow-1"
-          >
+          <v-card color="grey lighten-4" flat tile class="flex-grow-1">
             <v-toolbar dense>
               <v-app-bar-nav-icon @click="userList = !userList"></v-app-bar-nav-icon>
               <v-toolbar-title>{{ roomName }} conversation</v-toolbar-title>
               <div class="flex-grow-1"></div>
-              <v-btn
-                color="error"
-                @click="unsubscribe"
-              >Leave this room...</v-btn>
+              <v-btn color="error" @click="unsubscribe">Leave this room...</v-btn>
             </v-toolbar>
           </v-card>
         </div>
@@ -52,13 +36,15 @@
           <chat-message-sender></chat-message-sender>
         </div>
       </div>
-    </div>
+
+    </section>
   </v-container>
 </template>
 
 <script>
 import ChatContent from "@/components/room/ChatContent.vue";
 import ChatMessageSender from "@/components/room/ChatMessageSender.vue";
+
 export default {
   components: {
     ChatContent,
@@ -100,6 +86,7 @@ export default {
 .users {
   margin: 5px;
 }
+
 .users .showUserList {
   width: 200px !important;
 }

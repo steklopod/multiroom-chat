@@ -1,4 +1,4 @@
-package by.steklopod.multiroomchat;
+package by.steklopod.chat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.jackson.datatype.VavrModule;

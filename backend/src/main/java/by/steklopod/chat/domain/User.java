@@ -1,4 +1,4 @@
-package by.steklopod.multiroomchat.user;
+package by.steklopod.chat.domain;
 
 import java.util.Objects;
 

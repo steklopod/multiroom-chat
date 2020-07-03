@@ -1,6 +1,6 @@
-package by.steklopod.multiroomchat.chat.dto;
+package by.steklopod.chat.domain.dto;
 
-import by.steklopod.multiroomchat.user.User;
+import by.steklopod.chat.domain.User;
 import io.vavr.collection.Set;
 
 public class ChatRoomUserListDto {

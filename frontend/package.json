@@ -2,7 +2,7 @@
   "name": "vue-multiroom-chat",
   "version": "1.0.0",
   "description": "Vue Multiroom Chat with Nuxt, Vuex and WebSocket",
-  "author": "kojot",
+  "author": "steklopod",
   "private": true,
   "scripts": {
     "dev": "nuxt",

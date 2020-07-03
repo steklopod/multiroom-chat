@@ -3,19 +3,13 @@
     <v-subheader>New room</v-subheader>
     <v-list-item-content>
       <form @submit.prevent="addRoom">
-        <v-text-field
-          label="Room name"
-          name="roomname"
-          type="text"
-          :rules="[rules.required]"
-          ref="roomname"
-          v-model="roomname"
-        ></v-text-field>
+        <v-text-field label="Room name" name="roomname" type="text"
+                      :rules="[rules.required]" ref="roomname"
+                      v-model="roomname">
+        </v-text-field>
       </form>
-      <v-btn
-        color="primary"
-        @click="addRoom"
-      >
+
+      <v-btn color="primary" @click="addRoom">
         <v-icon>add</v-icon>
         Add
       </v-btn>

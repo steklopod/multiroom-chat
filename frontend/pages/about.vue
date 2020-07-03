@@ -1,19 +1,13 @@
 <template>
-  <v-flex
-    text-center
-    xs12
-    sm6
-    md3
-  >
+  <v-flex text-center xs12 sm6 md3>
     Hello about page
-
   </v-flex>
 
 </template>
 
 <script>
 export default {
-  fetch({ store }) {
+  fetch({store}) {
     store.commit("main/showSidebar", false);
   },
   layout: "chat"

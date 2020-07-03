@@ -1,9 +1,5 @@
 <template>
-  <v-flex
-    xs12
-    sm5
-    text-center
-  >
+  <v-flex xs12 sm5 text-center>
     <p>Welcome, <b>{{ username }}</b>! Select the room or add a new one to chat with other users.</p>
   </v-flex>
 
@@ -11,7 +7,7 @@
 
 <script>
 export default {
-  fetch({ store }) {
+  fetch({store}) {
     store.commit("main/showSidebar", true);
     store.dispatch("websocket/connect");
   },

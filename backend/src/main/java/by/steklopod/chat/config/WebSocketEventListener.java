@@ -1,6 +1,6 @@
-package by.steklopod.multiroomchat.app.websocket;
+package by.steklopod.chat.config;
 
-import by.steklopod.multiroomchat.chat.controller.ChatController;
+import by.steklopod.chat.controller.ChatController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;

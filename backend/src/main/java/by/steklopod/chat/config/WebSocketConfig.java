@@ -1,4 +1,4 @@
-package by.steklopod.multiroomchat.app.websocket;
+package by.steklopod.chat.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

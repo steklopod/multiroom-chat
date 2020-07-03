@@ -1,7 +1,6 @@
-package by.steklopod.multiroomchat.chat.domain;
+package by.steklopod.chat.domain;
 
-import by.steklopod.multiroomchat.chat.dto.SimpleRoomDto;
-import by.steklopod.multiroomchat.user.User;
+import by.steklopod.chat.domain.dto.SimpleRoomDto;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
 

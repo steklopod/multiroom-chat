@@ -1,20 +1,9 @@
 <template>
-  <v-flex
-    sm12
-    md8
-    text-center
-  >
+  <v-flex sm12 md8 text-center>
     <form @submit.prevent="sendMessage">
-      <v-text-field
-        label="Type a message"
-        type="text"
-        v-model="message"
-      >
+      <v-text-field label="Type a message" type="text" v-model="message">
         <template v-slot:append>
-          <v-btn
-            color="primary"
-            @click="sendMessage"
-          >
+          <v-btn color="primary" @click="sendMessage">
             Send message
             <v-icon right>keyboard_return</v-icon>
           </v-btn>
@@ -40,7 +29,7 @@ export default {
     sendMessage() {
       const newMessage = {
         type: "MESSAGE",
-        // userName: "kojot",
+     // userName: "steklopod",
         message: this.message
       };
       const messageWithRoomId = { roomId: this.roomId, message: newMessage };

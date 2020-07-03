@@ -7,9 +7,9 @@ A multiroom chat application with Java, Spring, WebSocket on the backend and Vue
 ![multiroom-chatspring-vue-websocket-live-example](http://kojotdev.com/wp-content/uploads/2019/09/multiroom-chat-live.gif)
 
 ## Backend
-Open `backend` as maven project and run `MultiroomChatApplication`.
+Open `backend` module and run `ChatApplication`.
 
 ## Frontend
-Open `frontend` and then:
+Open `frontend` module and then:
 * `npm install`
 * `npm run dev`

@@ -1,15 +1,8 @@
 <template>
-  <v-flex
-    xs12
-    sm3
-    text-center
-  >
+  <v-flex xs12 sm3 text-center>
     Welcome in the <strong>{{ roomName }}</strong> room.
     <v-flex mt-5>
-      <v-btn
-        color="error"
-        @click="subscribe"
-      >Start Chatting</v-btn>
+      <v-btn color="error" @click="subscribe">Start Chatting</v-btn>
     </v-flex>
   </v-flex>
 </template>

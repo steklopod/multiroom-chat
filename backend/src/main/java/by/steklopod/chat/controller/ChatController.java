@@ -1,14 +1,14 @@
-package by.steklopod.multiroomchat.chat.controller;
+package by.steklopod.chat.controller;
 
-import by.steklopod.multiroomchat.chat.dto.ChatRoomUserListDto;
-import by.steklopod.multiroomchat.chat.dto.NewRoomDto;
-import by.steklopod.multiroomchat.chat.dto.SimpleRoomDto;
-import by.steklopod.multiroomchat.chat.dto.UserRoomKeyDto;
-import by.steklopod.multiroomchat.chat.service.RoomService;
-import by.steklopod.multiroomchat.message.Message;
-import by.steklopod.multiroomchat.message.MessageTypes;
-import by.steklopod.multiroomchat.user.User;
-import by.steklopod.multiroomchat.chat.domain.Room;
+import by.steklopod.chat.domain.dto.ChatRoomUserListDto;
+import by.steklopod.chat.domain.dto.NewRoomDto;
+import by.steklopod.chat.domain.dto.SimpleRoomDto;
+import by.steklopod.chat.domain.dto.UserRoomKeyDto;
+import by.steklopod.chat.service.RoomService;
+import by.steklopod.chat.domain.Message;
+import by.steklopod.chat.domain.MessageTypes;
+import by.steklopod.chat.domain.User;
+import by.steklopod.chat.domain.Room;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
 import org.slf4j.Logger;
