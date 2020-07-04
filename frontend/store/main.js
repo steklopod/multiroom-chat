@@ -15,10 +15,12 @@ export const getters = {
   roomName: state => roomId => {
     return state.roomList.find(room => room.key === roomId).name;
   },
+
   usersInChatRoom: state => roomId => {
     const userList = state.usersInChatRoom[roomId];
     return userList ? userList.users : [];
   },
+
   roomMessages: state => roomId => {
     const roomMessages = state.roomMessages[roomId];
     return roomMessages ? roomMessages.messages : [];
@@ -45,15 +47,23 @@ export const mutations = {
     subscribe(state, roomKey, false);
   },
   sendMessage(state, newMessage) {
-    const roomMessage = state.roomMessages[newMessage.roomKey];
+    const roomKey = newMessage.roomKey;
+    const message = newMessage.message;
+    const roomMessage = state.roomMessages[roomKey];
     if (roomMessage) {
-      roomMessage.messages.push(newMessage.message);
+
+      console.log("sendMessage {main.js}, roomMessage = true, newMessage.message: ", message)
+
+      roomMessage.messages.push(message);
     } else {
       const firstMessage = {
-        roomKey: newMessage.roomKey,
-        messages: [newMessage.message]
+        roomKey: roomKey,
+        messages: [message]
       };
-      Vue.set(state.roomMessages, newMessage.roomKey, firstMessage);
+
+      console.log("sendMessage {main.js}, roomMessage = false, newMessage.message: ", message)
+
+      Vue.set(state.roomMessages, roomKey, firstMessage);
     }
   },
   updateRoomUserList(state, roomUserList) {
@@ -65,12 +75,17 @@ export const actions = {
   addRoom({ state, commit }, roomName) {
     if (this.stompClient && this.stompClient.connected) {
       const newRoom = { roomName: roomName };
+
+      console.log("addRoom {main.js}, newRoom: ", newRoom)
+
       this.stompClient.send("/app/chat/addRoom", JSON.stringify(newRoom), {});
     }
   },
+
   subscribeRoomUserList({ state, commit }, roomId) {
     if (this.stompClient && this.stompClient.connected) {
       const subscribeUrl = "/chat/" + roomId + "/userList";
+
       this.stompClient.subscribe(
         subscribeUrl,
         tick => {
@@ -79,6 +94,7 @@ export const actions = {
         },
         { id: roomId + "_userList" }
       );
+
       this.stompClient.subscribe(
         "/chat/" + roomId + "/messages",
         tick => {
@@ -88,21 +104,25 @@ export const actions = {
         },
         { id: roomId + "_messages" }
       );
+
       const joinRoom = {
         roomKey: roomId,
-        userName: state.username
+        username: state.username
       };
+
       this.stompClient.send(
         "/app/chat/" + roomId + "/join",
         JSON.stringify(joinRoom)
       );
+
       commit("subscribe", roomId);
     }
   },
+
   unsubscribe({ state, commit }, roomId) {
     const leaveRoom = {
       roomKey: roomId,
-      userName: state.username
+      username: state.username
     };
     this.stompClient.send(
       "/app/chat/" + roomId + "/leave",
@@ -112,8 +132,9 @@ export const actions = {
     this.stompClient.unsubscribe(roomId + "_messages");
     commit("unsubscribe", roomId);
   },
+
   sendMessage({ state }, message) {
-    message.message.userName = state.username;
+    message.message.username = state.username;
     this.stompClient.send(
       "/app/chat/" + message.roomId + "/sendMessage",
       JSON.stringify(message.message)
@@ -123,6 +144,8 @@ export const actions = {
 
 function subscribe(state, roomKey, value) {
   state.roomList.map(room =>
-    room.key === roomKey ? (room.subscribed = value) : room
+    room.key === roomKey
+      ? (room.subscribed = value)
+      : room
   );
 }

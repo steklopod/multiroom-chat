@@ -29,7 +29,7 @@ export default {
     sendMessage() {
       const newMessage = {
         type: "MESSAGE",
-     // userName: "steklopod",
+     // username: "steklopod",
         message: this.message
       };
       const messageWithRoomId = { roomId: this.roomId, message: newMessage };

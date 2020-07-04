@@ -10,12 +10,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class RoomService {
-    @get:Synchronized
-    private var roomList: MutableList<Room> = mutableListOf()
-
-    init {
-        roomList = mutableListOf(defaultRoom())
-    }
+    private val roomList: MutableList<Room> = mutableListOf(defaultRoom())
 
     fun roomList(): List<SimpleRoomDto> = roomList.map { it.asSimpleRoomDto() }
 
@@ -32,7 +27,7 @@ class RoomService {
 
 
     fun addUserToRoom(userRoomKey: UserRoomKeyDto): ChatRoomUserListDto? {
-        val user = User(userRoomKey.userName)
+        val user = User(userRoomKey.username)
         roomList
             .find { it.key == userRoomKey.roomKey }
             ?.let { oldRoom ->
@@ -44,7 +39,7 @@ class RoomService {
     }
 
     fun removeUserFromRoom(userRoomKey: UserRoomKeyDto): ChatRoomUserListDto? {
-        val user = User(userRoomKey.userName)
+        val user = User(userRoomKey.username)
         roomList
             .find { room: Room -> room.key == userRoomKey.roomKey }
             ?.let { oldRoom ->
@@ -65,11 +60,7 @@ class RoomService {
 
 
     private fun defaultRoom() = Room("Main room")
-
-    @Synchronized
     private fun addRoom(room: Room): List<Room> = roomList.apply { add(room) }
-
-    @Synchronized
     private fun updateRoom(oldRoom: Room, newRoom: Room): List<Room> = roomList.apply { remove(oldRoom); add(newRoom) }
 
 

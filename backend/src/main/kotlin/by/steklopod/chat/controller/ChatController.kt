@@ -30,59 +30,56 @@ class ChatController(
     }
 
     @SubscribeMapping("/chat/roomList")
-    fun roomList(): List<SimpleRoomDto> {
-        return roomService.roomList()
-    }
+    fun roomList(): List<SimpleRoomDto> = roomService.roomList()
+
 
     @MessageMapping("/chat/addRoom")
     @SendTo("/chat/newRoom")
-    fun addRoom(newRoom: NewRoomDto): SimpleRoomDto {
-        return roomService.addRoom(newRoom.roomName)
-    }
+    fun addRoom(newRoom: NewRoomDto): SimpleRoomDto = roomService.addRoom(newRoom.roomName)
+
 
     @MessageMapping("/chat/{roomId}/join")
     fun userJoinRoom(userRoomKey: UserRoomKeyDto, headerAccessor: SimpMessageHeaderAccessor): ChatRoomUserListDto? {
 //        with enabled spring security
 //        final String securityUser = headerAccessor.getUser().getName();
-        val username = headerAccessor.sessionAttributes.put("username", userRoomKey.userName) as String?
-        val joinMessage = Message(MessageTypes.JOIN, userRoomKey.userName, "")
+        val username = headerAccessor.sessionAttributes.put("username", userRoomKey.username) as String?
+        log.info("User {$username} joined to chat {$userRoomKey}")
+
+        val joinMessage = Message(MessageTypes.JOIN, userRoomKey.username, "")
         return roomService.addUserToRoom(userRoomKey)
-            .let {
-                messagingTemplate.convertAndSend(String.format("/chat/%s/userList", it?.roomKey), it)
+            .apply {
+                messagingTemplate.convertAndSend("/chat/${this!!.roomKey}/userList", this)
                 sendMessage(userRoomKey.roomKey, joinMessage)
-                it
             }
     }
 
     @MessageMapping("/chat/{roomId}/leave")
     fun userLeaveRoom(userRoomKey: UserRoomKeyDto, headerAccessor: SimpMessageHeaderAccessor?): ChatRoomUserListDto? {
-        val leaveMessage = Message(MessageTypes.LEAVE, userRoomKey.userName, "")
+        val leaveMessage = Message(MessageTypes.LEAVE, userRoomKey.username, "")
+        log.info("User left chat {$userRoomKey}")
         return roomService.removeUserFromRoom(userRoomKey)
-            .let {
-                messagingTemplate.convertAndSend(String.format("/chat/%s/userList", it?.roomKey), it)
+            .apply {
+                messagingTemplate.convertAndSend("/chat/${this!!.roomKey}/userList", this)
                 sendMessage(userRoomKey.roomKey, leaveMessage)
-                it
             }
     }
 
     @MessageMapping("chat/{roomId}/sendMessage")
     fun sendMessage(@DestinationVariable roomId: String?, message: Message): Message {
-        messagingTemplate.convertAndSend(String.format("/chat/%s/messages", roomId), message)
+        messagingTemplate.convertAndSend("/chat/$roomId/messages", message)
         return message
     }
 
-    fun handleUserDisconnection(userName: String) {
-        val user = User(userName)
-        val leaveMessage = Message(MessageTypes.LEAVE, userName, "")
+    fun handleUserDisconnection(username: String) {
+        val user = User(username)
+        val leaveMessage = Message(MessageTypes.LEAVE, username, "")
         val userRooms = roomService.disconnectUser(user)
         userRooms
-            .map { room: Room -> ChatRoomUserListDto(room.key, room.users) }
-            .forEach(Consumer { roomUserList: ChatRoomUserListDto ->
-                messagingTemplate.convertAndSend(
-                    String.format("/chat/%s/userList", roomUserList.roomKey), roomUserList
-                )
-                sendMessage(roomUserList.roomKey, leaveMessage)
-            })
+            .map { ChatRoomUserListDto(it.key, it.users) }
+            .forEach {
+                messagingTemplate.convertAndSend("/chat/${it.roomKey}/userList", it)
+                sendMessage(it.roomKey, leaveMessage)
+            }
     }
 
 

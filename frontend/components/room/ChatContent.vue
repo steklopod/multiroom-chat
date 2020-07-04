@@ -6,12 +6,12 @@
         <template v-if="message.type === 'MESSAGE'">
           <v-list-item-avatar>
             <v-avatar color="#ff9b20">
-              <span class="white--text headline">{{ message.userName.charAt(0) }}</span>
+              <span class="white--text headline">{{ message.username.charAt(0) }}</span>
             </v-avatar>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title v-text="message.userName"></v-list-item-title>
+            <v-list-item-title v-text="message.username"></v-list-item-title>
             <v-list-item-subtitle v-text="message.message"></v-list-item-subtitle>
           </v-list-item-content>
         </template>
@@ -38,8 +38,8 @@ export default {
   },
   methods: {
     userEvent(message) {
-      if (message.type === "JOIN") return message.userName + " joined!";
-      if (message.type === "LEAVE") return message.userName + " left!";
+      if (message.type === "JOIN") return message.username + " joined!";
+      if (message.type === "LEAVE") return message.username + " left!";
       return "uknown message type";
     }
   }

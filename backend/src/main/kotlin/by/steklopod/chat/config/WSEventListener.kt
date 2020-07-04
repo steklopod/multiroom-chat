@@ -21,7 +21,8 @@ class WSEventListener(
 
     @EventListener
     fun handleWebSocketConnectListener(event: SessionConnectedEvent) {
-        val sessionId = StompHeaderAccessor.wrap(event.message).sessionId
+        val headerAccessor = StompHeaderAccessor.wrap(event.message)
+        val sessionId = headerAccessor.sessionId
         logger.info("Установлено новое подключение к веб-сокету $sessionId")
     }
 
